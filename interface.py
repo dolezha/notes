@@ -24,15 +24,11 @@ class ConsoleInterface:
         """Clear console, return if it was successful."""
 
         if self.plt == "Windows":
-            clear = lambda: os.system('cls')
-            clear()
-
+            os.system('cls')
             return True
         
         elif self.plt == "Linux" or self.plt == "Darwin":
-            clear = lambda: os.system('clear')
-            clear()
-
+            os.system('clear')
             return True
         
         else:
@@ -80,22 +76,23 @@ class ConsoleInterface:
         while option not in ['1', '2', '3', '4', '5', '6']:
             option = self.console.input("\n[bold blue]Выберите действие >> [/]")
 
-            if option == '1':
-                self.add_note_dialog()
-            elif option == '2':
-                self.show_all_notes()
-            elif option == '3':
-                self.search_notes_dialog()
-            elif option == '4':
-                self.delete_note_dialog()
-            elif option == '5':
-                self.display_note()
-            elif option == '6':
-                self.clear()
-                self.console.print("До свидания!", style="bold green")
-                exit()
-            else:
-                self.console.print("Выберите действие, обозначенное цифрами от 1 до 6.", style="bold red")
+            match option:
+                case '1':
+                    self.add_note_dialog()
+                case '2':
+                    self.show_all_notes()
+                case '3':
+                    self.search_notes_dialog()
+                case '4':
+                    self.delete_note_dialog()
+                case '5':
+                    self.display_note()
+                case '6':
+                    self.clear()
+                    self.console.print("До свидания!", style="bold green")
+                    exit()
+                case _:
+                    self.console.print("Выберите действие, обозначенное цифрами от 1 до 6.", style="bold red")
 
     def add_note_dialog(self) -> None:
         """
